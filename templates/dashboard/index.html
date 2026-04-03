@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<h1>Dashboard</h1>
+<div class="grid">
+  <article>
+    <h3>Mis grupos</h3>
+    <p>{{ my_groups|length }} grupos activos</p>
+    <a href="{% url 'group_list' %}">Ver grupos</a>
+  </article>
+  <article>
+    <h3>Mis pronósticos</h3>
+    <p>{{ my_prediction_count }} pronósticos cargados</p>
+    <a href="{% url 'my_predictions' %}">Ver pronósticos</a>
+  </article>
+</div>
+
+<h2>Próximos partidos</h2>
+{% include "partials/match_table.html" with matches=upcoming_matches show_form=False %}
+
+<h2>Partidos pendientes de pronóstico</h2>
+{% include "partials/match_table.html" with matches=pending_predictions show_form=True %}
+{% endblock %}

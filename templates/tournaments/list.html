@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Torneos{% endblock %}
+{% block content %}
+<h1>Torneos</h1>
+<ul>
+  {% for tournament in object_list %}
+  <li><a href="{% url 'tournament_detail' tournament.slug %}">{{ tournament.name }}</a></li>
+  {% endfor %}
+</ul>
+{% endblock %}

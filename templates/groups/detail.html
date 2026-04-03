@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}{{ object.name }}{% endblock %}
+{% block content %}
+<h1>{{ object.name }}</h1>
+<p>Torneo: {{ object.tournament.name }}</p>
+<p>Código de invitación: <strong>{{ object.invite_code }}</strong></p>
+
+<h2>Ranking</h2>
+{% if leaderboard %}
+<table>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Usuario</th>
+      <th>Puntos</th>
+      <th>Exactos</th>
+      <th>Signos</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for row in leaderboard %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ row.user.username }}</td>
+        <td>{{ row.points_total }}</td>
+        <td>{{ row.exact_hits }}</td>
+        <td>{{ row.correct_outcomes }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p>Sin leaderboard todavía.</p>
+{% endif %}
+{% endblock %}

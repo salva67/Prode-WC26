@@ -1,0 +1,38 @@
+{
+  "tournament": {
+    "name": "Mundial 2026",
+    "slug": "world-cup-2026",
+    "status": "active",
+    "starts_at": "2026-06-11T00:00:00Z",
+    "ends_at": "2026-07-19T23:59:59Z"
+  },
+  "stages": [
+    {"code": "GROUP", "name": "Fase de grupos", "order": 1},
+    {"code": "R32", "name": "32avos", "order": 2},
+    {"code": "R16", "name": "Octavos", "order": 3},
+    {"code": "QF", "name": "Cuartos", "order": 4},
+    {"code": "SF", "name": "Semifinal", "order": 5},
+    {"code": "FIN", "name": "Final", "order": 6}
+  ],
+  "teams": [
+    {"name": "Argentina", "short_name": "Argentina", "fifa_code": "ARG", "group_code": "A", "flag_emoji": "🇦🇷"},
+    {"name": "Brasil", "short_name": "Brasil", "fifa_code": "BRA", "group_code": "A", "flag_emoji": "🇧🇷"}
+  ],
+  "venues": [
+    {"name": "MetLife Stadium", "city": "New York/New Jersey", "country": "USA", "timezone": "America/New_York", "capacity": 82500}
+  ],
+  "matches": [
+    {
+      "number": 1,
+      "stage_code": "GROUP",
+      "group_code": "A",
+      "home_code": "ARG",
+      "away_code": "BRA",
+      "venue_name": "MetLife Stadium",
+      "venue_city": "New York/New Jersey",
+      "kickoff_at": "2026-06-11T21:00:00Z",
+      "lock_at": "2026-06-11T20:45:00Z",
+      "status": "scheduled"
+    }
+  ]
+}

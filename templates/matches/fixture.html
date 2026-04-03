@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}Fixture{% endblock %}
+{% block content %}
+<h1>Fixture</h1>
+<table>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Partido</th>
+      <th>Fase</th>
+      <th>Fecha</th>
+      <th>Estadio</th>
+      <th>Estado</th>
+      <th>Resultado</th>
+      {% if user.is_authenticated %}<th>Pronóstico</th>{% endif %}
+      {% if user.is_staff %}<th>Admin</th>{% endif %}
+    </tr>
+  </thead>
+  <tbody>
+    {% for match in object_list %}
+      <tr>
+        <td>{{ match.number }}</td>
+        <td>{{ match.home_team.flag_emoji }} {{ match.home_team.short_name }} vs {{ match.away_team.short_name }} {{ match.away_team.flag_emoji }}</td>
+        <td>{{ match.stage.name }}</td>
+        <td>{{ match.kickoff_at|date:"d/m/Y H:i" }}</td>
+        <td>{{ match.venue.name }}</td>
+        <td>{{ match.get_status_display }}</td>
+        <td>
+          {% if match.result %}
+            {{ match.result.home_score }} - {{ match.result.away_score }}
+          {% else %}
+            —
+          {% endif %}
+        </td>
+        {% if user.is_authenticated %}
+        <td>
+          {% if match.can_predict %}
+          <form action="{% url 'save_prediction' match.id %}" method="post" class="inline-form">
+            {% csrf_token %}
+            <input type="number" name="home_score" min="0" placeholder="L" required>
+            <input type="number" name="away_score" min="0" placeholder="V" required>
+            <button type="submit">Guardar</button>
+          </form>
+          {% else %}
+            Cerrado
+          {% endif %}
+        </td>
+        {% endif %}
+        {% if user.is_staff %}
+        <td><a href="{% url 'publish_result' match.id %}">Publicar</a></td>
+        {% endif %}
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

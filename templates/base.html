@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{% block title %}{{ APP_NAME }}{% endblock %}</title>
+  <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+  <link rel="stylesheet" href="/static/css/app.css">
+</head>
+<body>
+  <nav class="container-fluid nav-shell">
+    <ul>
+      <li><strong><a href="/">⚽ {{ APP_NAME }}</a></strong></li>
+    </ul>
+    <ul>
+      <li><a href="{% url 'fixture' %}">Fixture</a></li>
+      {% if user.is_authenticated %}
+        <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+        <li><a href="{% url 'group_list' %}">Grupos</a></li>
+        <li><a href="{% url 'my_predictions' %}">Mis pronósticos</a></li>
+        <li><a href="{% url 'profile' %}">Perfil</a></li>
+        <li>
+          <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button class="secondary small-btn">Salir</button>
+          </form>
+        </li>
+      {% else %}
+        <li><a href="{% url 'login' %}">Ingresar</a></li>
+        <li><a href="{% url 'register' %}">Registro</a></li>
+      {% endif %}
+    </ul>
+  </nav>
+
+  <main class="container">
+    {% if messages %}
+      {% for message in messages %}
+        <article class="flash {{ message.tags }}">{{ message }}</article>
+      {% endfor %}
+    {% endif %}
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>

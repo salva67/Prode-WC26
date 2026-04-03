@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Mis grupos{% endblock %}
+{% block content %}
+<h1>Mis grupos</h1>
+<p>
+  <a href="{% url 'group_create' %}" role="button">Crear grupo</a>
+  <a href="{% url 'group_join' %}" role="button" class="secondary">Unirme por código</a>
+</p>
+{% if groups %}
+<ul>
+  {% for group in groups %}
+    <li><a href="{% url 'group_detail' group.slug %}">{{ group.name }}</a> — código {{ group.invite_code }}</li>
+  {% endfor %}
+</ul>
+{% else %}
+<p>No participás en ningún grupo todavía.</p>
+{% endif %}
+{% endblock %}

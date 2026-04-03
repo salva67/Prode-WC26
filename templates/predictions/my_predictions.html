@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Mis pronósticos{% endblock %}
+{% block content %}
+<h1>Mis pronósticos</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Partido</th>
+      <th>Pronóstico</th>
+      <th>Puntos</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for prediction in predictions %}
+      <tr>
+        <td>{{ prediction.match.home_team.short_name }} vs {{ prediction.match.away_team.short_name }}</td>
+        <td>{{ prediction.home_score }} - {{ prediction.away_score }}</td>
+        <td>{{ prediction.points_awarded }}</td>
+      </tr>
+    {% empty %}
+      <tr><td colspan="3">Todavía no cargaste pronósticos.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

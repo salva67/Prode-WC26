@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Inicio | {{ APP_NAME }}{% endblock %}
+{% block content %}
+<section class="hero">
+  <h1>Prode del Mundial</h1>
+  <p>Versión Django lista para productivizar: usuarios, grupos, fixture, pronósticos, ranking y admin.</p>
+  <div class="hero-actions">
+    <a href="{% url 'fixture' %}" role="button">Ver fixture</a>
+    {% if not user.is_authenticated %}
+      <a href="{% url 'register' %}" role="button" class="secondary">Crear cuenta</a>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

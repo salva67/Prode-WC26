@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Publicar resultado{% endblock %}
+{% block content %}
+<h1>Publicar resultado</h1>
+<p>{{ match.home_team }} vs {{ match.away_team }}</p>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Guardar resultado</button>
+</form>
+{% endblock %}
